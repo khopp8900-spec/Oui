@@ -1,0 +1,18 @@
+-- Services
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+-- Remote References
+local packages = ReplicatedStorage:WaitForChild("Packages")
+local packet = packages:WaitForChild("Packet")
+local remoteEvent = packet:WaitForChild("RemoteEvent")
+
+-- Payload Arguments
+local payload = {
+    buffer.fromstring("<\000")
+}
+
+-- Main Loop
+while true do
+    remoteEvent:FireServer(unpack(payload))
+    task.wait(0.016) -- ทำงานตามรอบ Frame (ประมาณ 60 FPS) เพื่อป้องกันอาการ Game Freeze
+end
